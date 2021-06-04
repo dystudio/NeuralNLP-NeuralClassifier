@@ -99,6 +99,11 @@ def data_process(df, outfile, tokenize_strategy):
     threadId = threading.currentThread().ident
     print(u'%s号进程任务 : '%processId)
     print(u'%s号线程任务 : '%threadId)
+    totalItems = len(df.index)
+
+    print('""""""""""print totalItems start"""""""""""""')
+    print(totalItems)
+    print('""""""""""print totalItems end"""""""""""""')
     #print('""""""""""print df start"""""""""""""')
     #print(df)
     #print('""""""""""print df end"""""""""""""')
@@ -108,15 +113,19 @@ def data_process(df, outfile, tokenize_strategy):
             print(u'%s号进程任务 : '%processId)
             print(u'%s号线程任务 : '%threadId)
             count+=1
+            
+            print('""""""""""doc_token start"""""""""""""')
+            tmpl = 'count/Total: {curentCount} / {items}!'
+            print(tmpl.format(curentCount = count,items = totalItems)) 
+            print('""""""""""doc_token end"""""""""""""')
+
             dict1 = {}
             dict1['doc_label'] = [str(df.loc[indexs].values[0])]
             doc_token = df.loc[indexs].values[1]
             # 只保留中文、大小写字母和阿拉伯数字
             reg = "[^0-9A-Za-z\u4e00-\u9fa5]"
             doc_token =re.sub(reg, '', doc_token)
-            print('""""""""""doc_token start"""""""""""""')
-            print(count)
-            print('""""""""""doc_token end"""""""""""""')
+           
             # 中文分词
             # 分词策略可以选“jieba”或者“pkuseg”
             if tokenize_strategy=='jieba':
