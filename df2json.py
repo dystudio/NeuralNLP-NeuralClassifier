@@ -1,7 +1,3 @@
-#coding=utf-8
-# 如果需要使用北大pkuseg分词，通过如下命令安装python包
-# !pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pkuseg
-
 """
 数据预处理功能，将csv格式的数据处理成腾讯文本分类包NeuralClassifier的数据格式
 之前的数据格式：csv文件，字段为label       item
@@ -54,7 +50,6 @@ df2.head(3)
 data_test.csv中数据格式是这样的：
 doc_label 	doc_token
 0 	        是要在车里唱歌么？居然还加了隔音棉！
-
 和之前咱们使用bert分类器的数据格式是一样的，之前的是
 label       item
 """
