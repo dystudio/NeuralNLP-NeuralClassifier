@@ -33,8 +33,8 @@ import os
 
 label_separator = "|"
 input_path ="data/"
-file_name1 = input_path+"train_v12.csv"
-df1 = pd.read_csv(file_name1,error_bad_lines=False)
+file_name1 = input_path+"train_v13.csv"
+df1 = pd.read_csv(file_name1,error_bad_lines=False).astype(str)
 df1.columns = ['doc_label', 'doc_token']
 df1 = df1[['doc_label', 'doc_token']]
 df1.head(3)
@@ -45,8 +45,8 @@ train_data_df, test_data_df= train_test_split(df1, test_size=0.2)
 #(train_data_df.shape)
 #print(test_data_df.shape)
 
-file_name2 = input_path+"test_v12.csv"
-df2 = pd.read_csv(file_name2,error_bad_lines=False)
+file_name2 = input_path+"test_v13.csv"
+df2 = pd.read_csv(file_name2,error_bad_lines=False).astype(str)
 df2.columns = ['doc_label', 'doc_token']
 df2 = df2[['doc_label', 'doc_token']]
 df2.head(3)
@@ -139,8 +139,8 @@ def data_process(df, outfile, tokenize_strategy):
             doc_token = df.loc[indexs].values[1]
             # 只保留中文、大小写字母和阿拉伯数字
             reg = "[^0-9A-Za-z\u4e00-\u9fa5]"
-            doc_token =re.sub(reg, '', doc_token)
-           
+            if isinstance(doc_token,str):
+                doc_token =re.sub(reg, '', doc_token)
             # 中文分词
             # 分词策略可以选“jieba”或者“pkuseg”
             if tokenize_strategy=='jieba':
